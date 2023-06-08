@@ -13,5 +13,5 @@ class User < ApplicationRecord
                     uniqueness:{case_sensitive: false}, 
                     length: {maximum:105},
                     format: { with: VALIDITY_CHECK_EMAIL }
-
+    has_secure_password
 end
