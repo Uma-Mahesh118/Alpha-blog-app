@@ -1,0 +1,6 @@
+@import 'bootstrap/dist/css/boostrap';
+
+.navbar { background-color: green !important; }
+      .nav-link { color: white !important}
+      #logo { float: left;  font-size: 1.7em;  color: #fff;  text-transform: uppercase; letter-spacing: -1px;  font-weight: bold; }
+      #home-container {  margin-top: 50px; background-image: app-url('assets/images/home.jpg') }

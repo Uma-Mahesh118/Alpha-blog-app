@@ -16,12 +16,12 @@ class ArticlesController < ApplicationController
     end
 
     def create
-        @article= Article.new(article_params )
+        @article= Article.new(article_params)
         if @article.save
-            redirect_to article_path(@article)
             flash[:notice] = "Article created Succesfully"
+            redirect_to article_path(@article)
         else
-            render new_article_path()        
+            render 'new'       
         end
     end
     
@@ -35,6 +35,7 @@ class ArticlesController < ApplicationController
             
         end
     end
+
     def destroy
         @article.destroy
         redirect_to articles_path
