@@ -17,6 +17,7 @@ class ArticlesController < ApplicationController
 
     def create
         @article= Article.new(article_params)
+        @article.user = User.first
         if @article.save
             flash[:notice] = "Article created Succesfully"
             redirect_to article_path(@article)
@@ -37,8 +38,12 @@ class ArticlesController < ApplicationController
     end
 
     def destroy
+        @article = Article.find(params[:id])
         @article.destroy
-        redirect_to articles_path
+        respond_to do |format|
+            format.html { redirect_to articles_path notice: 'Article was successfully deleted.' }
+            format.json { head :no_content }
+        end
     end
 
     private

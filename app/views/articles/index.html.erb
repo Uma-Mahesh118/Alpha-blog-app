@@ -15,8 +15,8 @@
                     <p class="card-text"> <%= truncate(article.description, length: 50)%></p>
                     <%= link_to 'Show', article_path(article), {:class=>"btn btn-outline-success"} %>
                     <%= link_to 'Edit', edit_article_path(article), {:class=>"btn btn-outline-info"}%>
-                    <button type="button" class="btn btn-outline-danger"> <%= link_to 'Delete', articles_path, data: {turbo_method: :delete , turbo_confirm: "Are you sure?"}%> </button>
-                </div>
+                    <%= button_to 'Delete', article_path(article), {method: :delete , :class=>"btn btn-outline-danger"}%>
+                </div> 
                 <div class="card-footer text-muted">
                     <small> Created <%=time_ago_in_words(article.created_at)%> ago, Edited <%=time_ago_in_words(article.updated_at)%> </small>
                 </div>
