@@ -1,3 +1,4 @@
+<%=render 'paginate'%>
 <div class="container">
   <div class="row">
     <h2 class="text-center mt-4"><%= @user.username %>'s Profile</h2>
@@ -12,8 +13,13 @@
                         Alpha Blog
                     </div>
                     <div class="card-body">
-                        <div class="card-text text-center"><%= simple_format(@user.email) %></div>
-                        <%= link_to "Edit Profile", edit_user_path(@user), class: "btn btn-outline-info" %>
+                        <h5>
+                            <%= @user.articles.count %> Articles
+                            <div class="card-text text-center"><%= simple_format(@user.email) %></div>
+                        </h5>
+                        <% if logged_in? && @user == current_user %>
+                            <%= link_to "Edit Profile", edit_user_path(@user), class: "btn btn-outline-info" %>
+                        <%end%>
                     <div class="card-footer text-muted">
                         <small>Account Created <%= time_ago_in_words(@user.created_at) %> ago, 
                         edited <%= time_ago_in_words(@user.updated_at) %> ago</small>
@@ -31,9 +37,18 @@
   </div>
 </div>
 
+<h3 class="text-center">Your Articles</h3>
+<div class="container text-center">
+    <% if logged_in? && @user == current_user %>
+        <%= button_to 'Delete Profile', user_path(@user), method: "delete", data: { confirm: 'Are you sure?'} , class: "btn btn-outline-danger" %>
+    <%end%>
+    </div>
+<div class="flickr_pagination">    
+    <%= will_paginate @articles, :container => false %>
+</div>
 <div class="container">
-    <h3 class="text-center">Your Articles</h3>
-    <% @user.articles.each do |article| %>
+    
+    <% @articles.each do |article| %>
         <div class="row justify-content-md-center ">
             <div class="col-8 mt-4">
                 <div class="card text-center shadow mb-5 bg-white rounded">
@@ -44,8 +59,10 @@
                         <h5 class="card-title"> <%= link_to article.title, article_path(article), {:class=>"text-success"} %></h5>
                         <p class="card-text"> <%= truncate(article.description, length: 50)%></p>
                         <%= link_to 'Show', article_path(article), {:class=>"btn btn-outline-success"} %>
-                        <%= link_to 'Edit', edit_article_path(article), {:class=>"btn btn-outline-info"}%>
-                        <%= button_to 'Delete', article_path(article), {method: :delete , :class=>"btn btn-outline-danger"}%>
+                        <% if logged_in? && article.user == current_user %>
+                            <%= link_to 'Edit', edit_article_path(article), {:class=>"btn btn-outline-info"}%> 
+                            <%= button_to 'Delete', article_path(article), {method: :delete , :class=>"btn btn-outline-danger"}%>
+                        <%end%>
                     </div> 
                     <div class="card-footer text-muted">
                         <small> Created <%=time_ago_in_words(article.created_at)%> ago, Edited <%=time_ago_in_words(article.updated_at)%> </small>
@@ -55,7 +72,7 @@
         </div>
     <% end %>
 </div>
-
-<style>
-   body {background-color: lightgrey} 
-</style>
+<div class="flickr_pagination ">    
+    <%= will_paginate @articles, :container => false %>
+</div>
+<br><br><br>

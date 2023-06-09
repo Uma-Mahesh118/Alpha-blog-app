@@ -5,6 +5,6 @@ module ApplicationHelper
         hash = Digest::MD5.hexdigest(email_adr)
         size= options[:size]
         pic_url=  "https://www.gravatar.com/avatar/#{hash}/?s=#{size}"
-        image_tag(pic_url, alt: user.username, class: "rounded mx-auto d-block center")
+        image_tag(pic_url, class: "rounded mx-auto d-block center")
     end
 end

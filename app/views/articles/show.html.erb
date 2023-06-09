@@ -5,12 +5,14 @@
       <div class="col-8 mt-4">
         <div class="card text-center shadow mb-5 bg-white rounded">
           <div class="card-header font-italic">
-            by Uma Mahesh
+            by  <%= link_to @article.user.username, user_path(@article.user) , {:class=>"text-info"}%> <%=gravatar_for @article.user , size:50%>
           </div>
           <div class="card-body">
             <div class="card-text text-center"><%= simple_format(@article.description) %></div>
-            <%= link_to "Edit", edit_article_path(@article), class: "btn btn-outline-info" %>
-            <button type="button" class="btn btn-outline-danger"> <%= link_to 'Delete', articles_path, data: {turbo_method: :delete , turbo_confirm: "Are you sure?"}%> </button>
+            <% if logged_in? && @article.user == current_user %>
+              <%= link_to "Edit", edit_article_path(@article), class: "btn btn-outline-info" %>
+              <%= button_to 'Delete', article_path(@article), { method: :delete, :class=>"btn btn-outline-danger"}%> 
+            <%end%>
           <div class="card-footer text-muted">
             <small>Created <%= time_ago_in_words(@article.created_at) %> ago, 
             edited <%= time_ago_in_words(@article.updated_at) %> ago</small>
@@ -20,6 +22,3 @@
     </div>
   </div>
 </div>
-<style>
-   body {background-color: lightgrey} 
-</style>
