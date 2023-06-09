@@ -1,14 +1,18 @@
 <nav class="navbar navbar-expand-lg bg-body-tertiary" >
         <div class="container-fluid" style="background-color: black ;">
-          <a class="navbar-brand" id="logo" href="#"> <%= link_to "ALPHA BLOG", root_path, {:style=>"color:#FFFFFF; text-decoration:none; font-size:25px; font-weight: bold; text-transform: uppercase;", :class => "css_class" } %>  </a>
+          <a class="navbar-brand" id="logo" href="#"> 
+              <%= link_to "ALPHA BLOG", root_path, {:style=>"color:#FFFFFF; text-decoration:none; font-size:25px; font-weight: bold; text-transform: uppercase;", :class => "css_class" } %> 
+          </a>
+        
+          
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
               <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle others"  href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                  Dropdown
+                <a class="nav-link dropdown-toggle d-inline-block" id="dropdowns"  href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  Actions
                 </a>
                 <ul class="dropdown-menu">
                   <li><%= link_to 'Articles List', articles_path, {:style=>"text-decoration:none; color: black;", :class => "css_class text-center dropdown-item"}%></li>
@@ -23,8 +27,14 @@
                 <a class="nav-link others"  > <%= link_to "Bloggers", users_path, {:style=>"color:#FFFFFF; text-decoration:none;  ", :class => "css_class nav-link" } %>  </a>
               </li>
               <% if logged_in? %>
-                <li class="nav-item active align-items-center" >
-                  <a class="nav-link others css_class" > <%= link_to current_user.username, user_path(current_user), {:style=>"color:#FFFFFF; text-decoration:none;  ", :class => "css_class nav-link" } %>  </a>
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle d-inline-block text-white" id="dropdowns"  href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <%= "(Admin) " if current_user.admin?%><%= current_user.username %>  </a>
+                  </a>
+                  <ul class="dropdown-menu">
+                    <li><%= link_to 'Edit Profile', edit_user_path(current_user), {:style=>"text-decoration:none; color: black;", :class => "css_class text-center dropdown-item"}%></li>
+                    <li><%= link_to 'Your Profile', user_path(current_user), {:style=>"text-decoration:none; color: black;", :class => "css_class text-center dropdown-item"}%></li>
+                  </ul>
                 </li>
                 <li class="nav-item active align-items-center" >
                   <a class="nav-link others css_class" > <%= button_to "Logout", logout_path, {method: :delete, :style=>"color:#FFFFFF; text-decoration:none;  ", :class => "css_class nav-link" } %>  </a>
@@ -38,6 +48,7 @@
                 </li>
 
               <% end %>
+
             </ul>
             <form class="d-flex" role="search">
               <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">

@@ -1,8 +1,4 @@
 <h1 class="text-center mt-4"> Users List</h1>
-<p class= 'text-center'>
-    <%= link_to 'Add new profile', signup_path, {:class=>"btn btn-primary"} %>
-</p> 
-
 <%= render 'paginate'%>
 
 <div class="flickr_pagination">    
@@ -23,7 +19,7 @@
                         <%= user.articles.count %> Articles
                     </h5>
                     <%= link_to 'View Profile', user_path(user), {:class=>"btn btn-outline-success"} %>
-                    <% if logged_in? && user == current_user %>
+                    <% if logged_in? && ( user == current_user || current_user.admin?)%>
                         <%= link_to 'Edit Profile', edit_user_path(user), {:class=>"btn btn-outline-info"}%>
                     <%end%>
                 </div> 
