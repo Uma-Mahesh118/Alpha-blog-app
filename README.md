@@ -22,22 +22,3 @@ Things you may want to cover:
 * Deployment instructions
 
 * ...
-
-<!--
-<table cellpadding=10>
-    <thead>
-        <th>Title</th>
-        <th>Description</th>
-        <th colspan='3'>Actions</th>
-    </thead>
-    <tbody>
-            <tr>
-                <td></td>
-                <td></td>
-                
-
-            </tr>
-        
-    </tbody>
-</table>
--->

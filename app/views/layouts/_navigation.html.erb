@@ -26,18 +26,30 @@
               <li class="nav-item active align-items-center" >
                 <a class="nav-link others"  > <%= link_to "Bloggers", users_path, {:style=>"color:#FFFFFF; text-decoration:none;  ", :class => "css_class nav-link" } %>  </a>
               </li>
-              <% if logged_in? %>
-                <li class="nav-item dropdown">
+              
+              <li class="nav-item dropdown">
                   <a class="nav-link dropdown-toggle d-inline-block text-white" id="dropdowns"  href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    <%= "(Admin) " if current_user.admin?%><%= current_user.username %>  </a>
+                    Categories
                   </a>
                   <ul class="dropdown-menu">
-                    <li><%= link_to 'Edit Profile', edit_user_path(current_user), {:style=>"text-decoration:none; color: black;", :class => "css_class text-center dropdown-item"}%></li>
-                    <li><%= link_to 'Your Profile', user_path(current_user), {:style=>"text-decoration:none; color: black;", :class => "css_class text-center dropdown-item"}%></li>
+                    <li><%= link_to 'View Categories', categories_path, {:style=>"text-decoration:none; color: black;", :class => "css_class text-center dropdown-item"}%></li>
+                    <% if ( logged_in? && current_user.admin? )%>
+                      <li><%= link_to 'Create Categories', new_category_path,  {:style=>"text-decoration:none; color: black;", :class => "css_class text-center dropdown-item"}%></li>
+                    <% end %>
                   </ul>
+              </li>
+              <% if logged_in? %>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle d-inline-block text-white" id="dropdowns"  href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                      <%= "(Admin) " if current_user.admin?%><%= current_user.username %>  </a>
+                    </a>
+                    <ul class="dropdown-menu">
+                      <li><%= link_to 'Edit Profile', edit_user_path(current_user), {:style=>"text-decoration:none; color: black;", :class => "css_class text-center dropdown-item"}%></li>
+                      <li><%= link_to 'Your Profile', user_path(current_user), {:style=>"text-decoration:none; color: black;", :class => "css_class text-center dropdown-item"}%></li>
+                    </ul>
                 </li>
                 <li class="nav-item active align-items-center" >
-                  <a class="nav-link others css_class" > <%= button_to "Logout", logout_path, {method: :delete, :style=>"color:#FFFFFF; text-decoration:none;  ", :class => "css_class nav-link" } %>  </a>
+                    <a class="nav-link others css_class" > <%= button_to "Logout", logout_path, {method: :delete, :style=>"color:#FFFFFF; text-decoration:none;  ", :class => "css_class nav-link" } %>  </a>
                 </li>
               <% else %>
                 <li class="nav-item active align-items-center" >
