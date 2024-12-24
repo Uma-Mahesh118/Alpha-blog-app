@@ -1,7 +1,3 @@
-Here’s a comprehensive **README.md** file for your **Alpha Blog App** project:
-
----
-
 # Alpha Blog App
 
 **Alpha Blog App** is a full-stack blogging platform where users can create profiles, write blogs, add tags, and filter blogs by tags. Each user has their own profile page where they can view all their blogs. The application provides a simple, elegant interface for managing personal blogs and exploring content through tagging.
